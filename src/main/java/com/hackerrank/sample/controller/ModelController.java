@@ -90,9 +90,9 @@ public class ModelController {
             )
     })
     @DeleteMapping("/model/{id}")
-    public ResponseEntity<Void> deleteModelById(@PathVariable Long id) {
+    public ResponseEntity<String> deleteModelById(@PathVariable Long id) {
         modelService.deleteModelById(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("Item deleted");
     }
 
     /**
