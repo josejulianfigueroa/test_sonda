@@ -30,7 +30,6 @@ import lombok.NoArgsConstructor;
 public class Model implements Serializable {
 
     @Id
-    @NotNull(message = "id is required")
     private Long id;
 
     @NotBlank(message = "name is required")
