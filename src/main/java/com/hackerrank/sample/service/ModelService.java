@@ -5,6 +5,7 @@ import java.util.List;
 
 public interface ModelService {
     void deleteAllModels();
+
     void deleteModelById(Long id);
 
     void createModel(Model model);
@@ -12,4 +13,5 @@ public interface ModelService {
     Model getModelById(Long id);
 
     List<Model> getAllModels();
+
 }
