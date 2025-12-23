@@ -162,17 +162,16 @@ public class HttpJsonDynamicUnitTest {
 
                     ClassPathResource jsonResource = new ClassPathResource("testcases/" + filename);
                     try (InputStream inputStream = jsonResource.getInputStream()) {
+                        // **OPCIÓN 2: Filtrar líneas válidas de JSON individual**
                         List<String> lines = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
                                 .lines()
+                                .map(String::trim)
+                                .filter(line -> !line.isEmpty())
+                                .filter(line -> !line.equals("[") && !line.equals("]"))
+                                .filter(line -> line.startsWith("{") && line.endsWith("}"))
                                 .collect(toList());
 
-                        // Filter out empty lines and add validation
-                        for (String line : lines) {
-                            String trimmedLine = line.trim();
-                            if (!trimmedLine.isEmpty()) {
-                                jsonStrings.add(trimmedLine);
-                            }
-                        }
+                        jsonStrings.addAll(lines);
                     } catch (IOException ex) {
                         addTestFailure(filename,
                                 new Pair(new Pair("File Read", "Cannot read file"),
@@ -182,8 +181,8 @@ public class HttpJsonDynamicUnitTest {
 
                     if (jsonStrings.isEmpty()) {
                         addTestFailure(filename,
-                                new Pair(new Pair("Empty File", "No valid JSON lines found"),
-                                        new Pair("", "File is empty or contains only whitespace")));
+                                new Pair(new Pair("Empty File", "No valid JSON objects found"),
+                                        new Pair("", "File contains no valid JSON objects")));
                         return;
                     }
 
@@ -207,14 +206,14 @@ public class HttpJsonDynamicUnitTest {
                         } catch (JsonProcessingException ex) {
                             addTestFailure(filename,
                                     new Pair(new Pair("JSON Parse Error", ex.getMessage()),
-                                            new Pair(trimmedJson, "")));
+                                            new Pair(trimmedJson.substring(0, Math.min(100, trimmedJson.length())), "")));
                             return;
                         }
 
                         if (jsonObject == null) {
                             addTestFailure(filename,
                                     new Pair(new Pair("JSON Parse", "Failed to parse JSON"),
-                                            new Pair(trimmedJson, "")));
+                                            new Pair(trimmedJson.substring(0, Math.min(100, trimmedJson.length())), "")));
                             return;
                         }
 
@@ -224,7 +223,7 @@ public class HttpJsonDynamicUnitTest {
                         if (request == null || response == null) {
                             addTestFailure(filename,
                                     new Pair(new Pair("Missing Fields", "request or response missing"),
-                                            new Pair("request/response", trimmedJson)));
+                                            new Pair("request/response", trimmedJson.substring(0, Math.min(100, trimmedJson.length())))));
                             return;
                         }
 
@@ -261,8 +260,8 @@ public class HttpJsonDynamicUnitTest {
                                     break;
                                 default:
                                     addTestFailure(filename,
-                                            new Pair(new Pair("Unknown Method", "Unsupported HTTP method"),
-                                                    new Pair(method, "")));
+                                            new Pair(new Pair("Unknown Method", "Unsupported HTTP method: " + method),
+                                                    new Pair("", "")));
                                     break;
                             }
                         } catch (Exception ex) {
@@ -458,7 +457,6 @@ public class HttpJsonDynamicUnitTest {
         testFailures.put(filename, failure);
     }
 
-    // generateReportForProperExecution() method remains the same...
     private void generateReportForProperExecution() {
         List<Long> executionTimeInSeconds = executionTime.keySet()
                 .stream()
@@ -558,7 +556,6 @@ public class HttpJsonDynamicUnitTest {
             throw new RuntimeException(ex);
         }
 
-        // XML report generation (simplified, same logic as before)
         generateXmlReport(failedTestFiles);
     }
 
