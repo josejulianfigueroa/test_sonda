@@ -27,9 +27,9 @@ Retorna array de 10+ items	200 OK
 GET	/api/model/{id}	Obtener producto por ID
 Ej: /api/model/1	200 OK
 DELETE	/api/model/{id}	Eliminar producto por ID
-Ej: /api/model/5	204 No Content
+Ej: /api/model/5	200 OK
 DELETE	/api/erase	Eliminar TODOS los productos
-¡⚠️ Destruye datos de ejemplo!	204 No Content
+¡⚠️ Destruye datos de ejemplo!	200 OK
 
 Ejemplo Request/Response - POST /api/model
 Request:
@@ -136,11 +136,11 @@ text
 
 | Método | Endpoint | Descripción | Código Esperado |
 |--------|----------|-------------|-----------------|
-| `POST` | `/api/model` | **Crear nuevo producto**<br>Body: JSON con `name`, `price`, etc. | `201 Created` |
-| `GET` | `/api/model` | **Listar todos los productos**<br>Retorna array de 10+ items | `200 OK` |
-| `GET` | `/api/model/{id}` | **Obtener producto por ID**<br>Ej: `/api/model/1` | `200 OK` |
-| `DELETE` | `/api/model/{id}` | **Eliminar producto por ID**<br>Ej: `/api/model/5` | `204 No Content` |
-| `DELETE` | `/api/erase` | **Eliminar TODOS los productos**<br>¡⚠️ Destruye datos de ejemplo! | `204 No Content` |
+| `POST` | `/api/model` | **Crear nuevo producto**<br>Body: JSON con `name`, `price`, etc. | `201 Created`   |
+| `GET` | `/api/model` | **Listar todos los productos**<br>Retorna array de 10+ items | `200 OK`        |
+| `GET` | `/api/model/{id}` | **Obtener producto por ID**<br>Ej: `/api/model/1` | `200 OK`        |
+| `DELETE` | `/api/model/{id}` | **Eliminar producto por ID**<br>Ej: `/api/model/5` | `200 OK`        |
+| `DELETE` | `/api/erase` | **Eliminar TODOS los productos**<br>¡⚠️ Destruye datos de ejemplo! | `20O OK`        |
 
 ### Ejemplo Request/Response - POST /api/model
 

@@ -32,27 +32,27 @@ public class Model implements Serializable {
     private Long id;
 
     @NotBlank(message = "name is required")
-    @Size(max = 100, message = "name must be at most 100 characters")
+    @Size(max = 100, message = "name must be at most 10 characters")
     private String name;
 
-    @NotBlank(message = "imageUrl is required")
-    @Size(max = 255, message = "imageUrl must be at most 255 characters")
+    //@NotBlank(message = "imageUrl is required")
+    //@Size(max = 255, message = "imageUrl must be at most 255 characters")
     private String imageUrl;
 
-    @NotBlank(message = "description is required")
-    @Size(max = 500, message = "description must be at most 500 characters")
-    private String description;
+    //@NotBlank(message = "description is required")
+    //@Size(max = 500, message = "description must be at most 500 characters")
+    private String description;//
 
-    @NotNull(message = "price is required")
-    @DecimalMin(value = "0.0", inclusive = false, message = "price must be greater than 0")
+    //@NotNull(message = "price is required")
+    //@DecimalMin(value = "0.0", inclusive = false, message = "price must be greater than 0")
     private BigDecimal price;
 
-    @NotNull(message = "rating is required")
-    @DecimalMin(value = "0.0", message = "rating must be at least 0")
-    @DecimalMax(value = "5.0", message = "rating must be at most 5")
+    //@NotNull(message = "rating is required")
+    //@DecimalMin(value = "0.0", message = "rating must be at least 0")
+    //@DecimalMax(value = "5.0", message = "rating must be at most 5")
     private Double rating;
 
-    @NotBlank(message = "specifications is required")
-    @Size(max = 1000, message = "specifications must be at most 1000 characters")
+    //@NotBlank(message = "specifications is required")
+    //@Size(max = 1000, message = "specifications must be at most 1000 characters")
     private String specifications;
 }
