@@ -66,8 +66,8 @@ public class ModelController {
     @Operation(summary = "Delete all items", description = "Deletes all items in the system. Use for testing/cleanup.")
     @ApiResponses({
             @ApiResponse(
-                    responseCode = "204",
-                    description = "All items deleted"
+                    responseCode = "200",
+                    description = "All items deleted successfully"
             )
     })
     @DeleteMapping("/erase")
