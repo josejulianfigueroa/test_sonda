@@ -70,9 +70,9 @@ public class ModelController {
             )
     })
     @DeleteMapping("/erase")
-    public ResponseEntity<Void> deleteAllModels() {
+    public ResponseEntity<String> deleteAllModels() {
         modelService.deleteAllModels();
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("All items deleted");  // ✅ 200 OK
     }
 
     /**
