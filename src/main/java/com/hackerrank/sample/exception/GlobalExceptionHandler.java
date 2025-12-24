@@ -37,6 +37,6 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, String>> handleBadResourceRequest(NoSuchResourceFoundException ex) {
         Map<String, String> error = new HashMap<>();
         error.put("error", ex.getMessage());  // "Model with same id exists."
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 }
