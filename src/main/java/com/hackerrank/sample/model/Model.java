@@ -36,7 +36,7 @@ public class Model implements Serializable {
     @Size(max = 100, message = "name must be at most 100 characters")
     private String name;
 
-    /*
+
     @NotBlank(message = "imageUrl is required")
     @Size(max = 255, message = "imageUrl must be at most 255 characters")
     private String imageUrl;
@@ -56,5 +56,5 @@ public class Model implements Serializable {
 
     @NotBlank(message = "specifications is required")
     @Size(max = 1000, message = "specifications must be at most 1000 characters")
-    private String specifications;*/
+    private String specifications;
 }
