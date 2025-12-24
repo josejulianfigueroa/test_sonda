@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
 @Tag(name = "Items", description = "Endpoints for item comparison data")
 public class ModelController {
 

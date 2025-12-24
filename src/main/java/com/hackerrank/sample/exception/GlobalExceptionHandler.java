@@ -25,4 +25,18 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
     }
+
+    @ExceptionHandler(BadResourceRequestException.class)
+    public ResponseEntity<Map<String, String>> handleBadResourceRequest(BadResourceRequestException ex) {
+        Map<String, String> error = new HashMap<>();
+        error.put("error", ex.getMessage());  // "Model with same id exists."
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    @ExceptionHandler(NoSuchResourceFoundException.class)
+    public ResponseEntity<Map<String, String>> handleBadResourceRequest(NoSuchResourceFoundException ex) {
+        Map<String, String> error = new HashMap<>();
+        error.put("error", ex.getMessage());  // "Model with same id exists."
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
 }
