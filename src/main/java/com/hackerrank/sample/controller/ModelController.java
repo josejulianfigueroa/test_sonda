@@ -81,7 +81,7 @@ public class ModelController {
     @Operation(summary = "Delete item by id", description = "Deletes a single item identified by its id.")
     @ApiResponses({
             @ApiResponse(
-                    responseCode = "204",
+                    responseCode = "200",
                     description = "Item deleted"
             ),
             @ApiResponse(

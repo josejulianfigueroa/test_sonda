@@ -15,7 +15,7 @@ public class DataInitializer {
     @Bean
     public CommandLineRunner initModels(ModelRepository modelRepository) {
         return args -> {
-            /*
+
             if (modelRepository.count() > 0) {
                 return;
             }
@@ -114,7 +114,7 @@ public class DataInitializer {
             );
 
             modelRepository.saveAll(seedModels);
-            */
+
         };
     }
 }
