@@ -1,4 +1,4 @@
-package com.hackerrank.sample;
+package com.sonda;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

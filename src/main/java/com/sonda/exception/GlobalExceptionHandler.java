@@ -1,4 +1,4 @@
-package com.hackerrank.sample.exception;
+package com.sonda.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,10 +33,10 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
-    @ExceptionHandler(NoSuchResourceFoundException.class)
-    public ResponseEntity<Map<String, String>> handleBadResourceRequest(NoSuchResourceFoundException ex) {
+    @ExceptionHandler(TablasReferenciasException.class)
+    public ResponseEntity<Map<String, String>> handleBadResourceRequest(TablasReferenciasException ex) {
         Map<String, String> error = new HashMap<>();
         error.put("error", ex.getMessage());  // "Model with same id exists."
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 }

@@ -1,65 +1,34 @@
-# API de Comparación de Productos
+# API de Búsqueda de Operacion
 
-API REST desarrollada con **Spring Boot 3.2.5** para gestionar productos electrónicos y sus especificaciones. Incluye documentación automática con **Swagger UI** y datos de ejemplo precargados.
+API REST desarrollada con **Spring Boot 3.2.5** para Servicio que implementa la búsqueda de un numero de registro y devuelve su operación asociada.
 
 ## 🏠 Acceso a la API
 
 | Endpoint | Descripción | Método |
 |----------|-------------|--------|
-| `http://localhost:8080/api/` | Página de bienvenida | `GET` |
 | `http://localhost:8080/swagger-ui.html` | **Swagger UI** - Documentación interactiva | `GET` |
 | `http://localhost:8080/v3/api-docs` | Esquema OpenAPI JSON | `GET` |
 
-## 📦 Datos de Ejemplo
-
-La clase `DataInitializer` carga **10 productos** al iniciar la aplicación (solo si la base de datos está vacía):
-
-// Ejemplos precargados:
-
-Smartphone X1 (299.99) - 4GB RAM, 128GB
-
-Laptop Pro 14 (1299.00) - i7, 16GB RAM
-
-Auriculares BT (149.90) - ANC, 30h batería
-
-Smartwatch Sport (199.90) - GPS, 5ATM
-// ... + 6 productos más
-
-
-**Nota**: Los datos se persisten en **H2** (base de datos en memoria por defecto).
 
 ## 🔗 Endpoints Disponibles
 
 | Método | Endpoint | Descripción | Código Esperado |
 |--------|----------|-------------|-----------------|
-| `POST` | `/api/model` | **Crear nuevo producto**<br>Body: JSON con `name`, `price`, etc. | `201 Created`   |
-| `GET` | `/api/model` | **Listar todos los productos**<br>Retorna array de 10+ items | `200 OK`        |
-| `GET` | `/api/model/{id}` | **Obtener producto por ID**<br>Ej: `/api/model/1` | `200 OK`        |
-| `DELETE` | `/api/model/{id}` | **Eliminar producto por ID**<br>Ej: `/api/model/5` | `200 OK`        |
-| `DELETE` | `/api/erase` | **Eliminar TODOS los productos**<br>¡⚠️ Destruye datos de ejemplo! | `20O OK`        |
 
-### Ejemplo Request/Response - POST /api/model
+| `GET` | `api/operacion?numeroRegistro=228160` | **Obtener operacion por numeroRegistro**<br>Ej: `/api/operacion?numeroRegistro=228160` | `200 OK`        |
+
+
+### Ejemplo Request/Response - GET /api/operacion
 
 **Request:**
-{
-"name": "iPhone 16",
-"imageUrl": "https://example.com/iphone16.png",
-"description": "Smartphone gama alta",
-"price": 1299.99,
-"rating": 4.8,
-"specifications": "256GB, 8GB RAM, OLED"
-}
+
+http://localhost:8080/api/operacion?numeroRegistro=228160
 
 
-**Response (201):**
+**Response (200):**
 {
-"id": 44,
-"name": "iPhone 16",
-"imageUrl": "https://example.com/iphone16.png",
-"description": "Smartphone gama alta",
-"price": 1299.99,
-"rating": 4.8,
-"specifications": "256GB, 8GB RAM, OLED"
+"numeroRegistro": 228160,
+"operacion": 2091
 }
 
 
@@ -67,11 +36,10 @@ Smartwatch Sport (199.90) - GPS, 5ATM
 
 | Error | Código | Descripción |
 |-------|--------|-------------|
-| `400 Bad Request` | Validación JSON inválido (ej: `price` negativo) |
-| `404 Not Found` | Producto no existe (`DELETE/GET` por ID inválido) |
+| `400 Bad Request` | TablasReferenciasException |
 | `500 Internal Server Error` | Error interno del servidor |
 
-**Swagger UI** muestra esquemas completos de `Model` y manejo de errores en cada endpoint.
+**Swagger UI** muestra esquemas completos de `Operacion` y manejo de errores en cada endpoint.
 
 ## 🚀 Configuración OpenAPI
 
@@ -79,10 +47,10 @@ Clase `OpenApiConfig` define metadatos:
 
 @OpenAPIDefinition(
 info = @Info(
-title = "Item Comparison API",
+title = "Búsqueda de Operacion API",
 version = "1.0.0",
-description = "Simplified backend API...",
-contact = @Contact(name = "Hackerrank Sample", email = "support@example.com")
+description = "Servicio que implementa la búsqueda de un numero de registro y devuelve su operación asociada",
+contact = @Contact(name = "Sonda Test", email = "support@example.com")
 )
 )
 
@@ -90,14 +58,10 @@ contact = @Contact(name = "Hackerrank Sample", email = "support@example.com")
 
 - **Spring Boot 3.2.5** + **Java 21**
 - **SpringDoc OpenAPI** (Swagger UI integrado)
-- **Spring Data JPA** + **H2 Database** (en memoria)
 - **Lombok** (builder pattern)
-- **Validaciones** (`@Valid` en requests)
 
 ## 📝 Uso Rápido
 
 1. **Ejecutar**: `mvn spring-boot:run`
 2. **Abrir Swagger**: `http://localhost:8080/swagger-ui.html`
-3. **Probar endpoints** directamente en la interfaz
-4. **Ver datos**: `GET /api/model`
-5. **Limpiar**: `DELETE /api/erase`
+3. **Probar endpoints** directamente en la interfaz Swagger UI.
